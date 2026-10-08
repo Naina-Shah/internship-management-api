@@ -32,8 +32,9 @@ def test_duplicate_supervisor_rejected():
         with pytest.raises(IntegrityError):
             conn.execute(
                 text("""
-                    INSERT INTO internship (i_name, t_id)
-                    VALUES ('Duplicate Supervisor Test', 1)
+                    UPDATE internship
+                    SET t_id = 1
+                    WHERE i_id = 2
                 """)
             )
 
