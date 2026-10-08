@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy import ForeignKey, DateTime
+from sqlalchemy import ForeignKey, DateTime,UniqueConstraint 
 import datetime
 
 from models.base import Base
@@ -30,4 +30,12 @@ class StudentInternship(Base):
     end_date: Mapped[datetime.datetime] = mapped_column(
         DateTime,
         nullable=False
+    )
+
+    __table_args__ = (
+        UniqueConstraint(
+            "student_id",
+            "internship_id",
+            name="unique_student_internship"
+        ),
     )
